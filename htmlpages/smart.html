@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>Shared Materials Audit Report Tool (SMART) </title>
+<script type="text/javascript" src="../cgi-bin/assets/date_time.js"></script>
+<script language="javascript">
+function GetSmart() {
+     document.getElementById("working").src="../cgi-bin/assets/working.gif";
+     document.forms[0].submit();
+     document.getElementById("searchbutton").value="PLEASE WAIT";
+ }
+</script>
+</head>
+<body onload="date_time('date_time');">
+<table bgcolor="#FFFFFF" cellpadding="4" cellspacing="1" border="0" width='90%'>
+<tr><td><H3>SMART</H3></td></tr>
+</table>
+<form action="http://gwreports.wrlc.org/cgi-bin/smart.cgi" method="POST" >
+<table bgcolor="#FFFFFF" cellpadding="4" cellspacing="1" border="0" width='90%'>
+<tr><td>
+Check an item | <font color='#CCCCCC'>Bulk Process</font> | <a href='about.html'>About</a>  | <a href='help.html'>Help</a> | <a href='https://goo.gl/forms/yFqrPaeZ1TPP5sWH2'>Feedback</a></td></tr>
+</table>
+<p>
+<table cellpadding='4' cellspacing='1' border='0' BGCOLOR='#EAEAEA' width ='90%'>
+<tr ><td bgcolor='#82E0AA' align='center' >
+<input type="text" name="searchvalue" size="15" >
+</td>
+<td BGCOLOR='#FFFFFF'> <input type="radio" name="id_type" value="BAR" checked>  Barcode <font color='#CCCCCC'>(14 digits)</font> <br>
+     <input type="radio" name="id_type" value="BIB" >  BIB ID <font color='#CCCCCC'>(WRLC Voyager BIB ID)</font>
+</td> 
+<td BGCOLOR='#FFFFFF'>
+<input type="radio" name="report_type" value="FULL" checked>  Full Display<font color="CCCCCC">  &nbsp; 3 lines per item </font>
+<br><input type="radio" name="report_type" value="BRIEF" >  Brief Display<font color="CCCCCC">  1 line per item </font>
+</td> 
+</tr>
+<tr ><td colspan='3' height='20' BGCOLOR='#FFFFFF'><img id="working"></td></tr>
+<tr ><td colspan='3' >
+<input id="searchbutton" type="BUTTON" onClick="javascript:GetSmart();" value="Search"></form>
+</td></tr>
+</table>
+
+<TABLE CELLPADDING='2' CELLSPACING='1' WIDTH='90%'>
+<TR ><TD ALIGN='CENTER'> ----[ Shared Materials Audit Reporting Tool ]---- </TD><TR>
+<TR ><TD ALIGN='CENTER'><SPAN ID="date_time"></SPAN></TD></TR>
+</TABLE>
+</BODY></HTML>
+
