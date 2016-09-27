@@ -17,5 +17,5 @@ Files in the repository under the directory 'htmlpages' should be placed in the 
 The files with the .cgi suffix go in the cgi-bin directory, and the rest go in their respective directories under cgi-bin 
 -- for example cgi-bin/queries/
 
-The SQL queries must be edited. Replace <PASSWORD> and <HOST> with the appropriate values.
+The SQL queries must be edited. Replace "\<PASSWORD\>" and "\<HOST\>" with the appropriate values.
 
