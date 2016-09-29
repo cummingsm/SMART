@@ -18,7 +18,7 @@ echo "
         echo "| <A HREF='../wrlc/smart.html'>New search</a>";
         echo "| <a href='../wrlc/about.html'>About</a>  | <a href='../wrlc/help.html'>Help</a>";
 	echo "| <a href='https://goo.gl/forms/yFqrPaeZ1TPP5sWH2'>Feedback</a></td>";
-	echo "<TD WIDTH='40%'> &nbsp; </TD></TR>";
+	echo "<TD > &nbsp; </TD></TR>";
 	echo "<TR><TD colspan='2'> &nbsp; </TD></TR></TABLE>";
 
 
