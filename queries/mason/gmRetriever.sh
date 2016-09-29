@@ -53,7 +53,7 @@ function writeNotes()
 # -------------------------------------------------
 echo 'vBib and vMfhd are' $vBib  $vMfhd >> $LOG
 notesfile=/tmp/$vBib'-'$vMfhd'VZ.out'
-echo 'GM|'$gBib'|'$vMfhd'||||ITEM_PERM_LOC#|ITEM_TEMP_LOC#|GMBIB '$gmbib'_IS_SCF||||||||||||'SEE NOTE IN GM CATALOG'||||||||NORMAL_VOL|#TITLEWRLC|#TITLEHOME|#VOLWRLC|#VOLHOME' >> $notesfile
+echo 'GM|'$gBib'|'$vMfhd'||||ITEM_PERM_LOC#|ITEM_TEMP_LOC#|GMBIB '$gmbib'_IS_SCF||||||||||||SEE NOTE IN GM CATALOG Pwebrecon.cgi?BBID='$gmbib'||||||||NORMAL_VOL|#TITLEWRLC|#TITLEHOME|#VOLWRLC|#VOLHOME' >> $notesfile
 }
 #
 #
