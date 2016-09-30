@@ -11,6 +11,7 @@
 # in the processing up to this point
 # 
 LOG=/var/www/wrlc/log/BIBID-$1.log;
+echo 'report file before testing for GM' >> $LOG
 GMcount=`grep -c 'GM|' /var/www/wrlc/report/$1-REPORT.txt`;
 if [[ "$GMcount" != "0" ]]; then
 	# ------------------------------------------------------------------
@@ -18,9 +19,6 @@ if [[ "$GMcount" != "0" ]]; then
 	# ------------------------------------------------------------------
 	echo 'found '$GMcount' GM holding(s) in report' >> $LOG
 	grep 'GM|' /var/www/wrlc/report/$1-REPORT.txt   > /tmp/$1GMLINES.txt
-	#
-	gmfilecount=`wc -l /tmp/$1GMLINES.txt | cut -f1 -d' '`
-	echo 'Number of saved gmLINES:'$gmfilecount 	>> $LOG
 	#
 	grep -v 'GM|' /var/www/wrlc/report/$1-REPORT.txt > /tmp/$1NOTGMLINES.txt
 	#
@@ -65,13 +63,9 @@ if [[ "$GMcount" != "0" ]]; then
 		# --------------------------------------- 
 		#
 		cat /tmp/$1*VZ.out >> /tmp/$1NOTGMLINES.txt
-		mv /tmp/$1NOTGMLINES.txt /var/www/wrlc/report/$1-REPORT.txt
-		echo 'report' >> $LOG
+		rm /tmp/$1*VZ.out
 	done
-	#cat /tmp/$1*VZ.out >> /tmp/$1NOTGMLINES.txt
-	#rm /tmp/$1*VZ.out
-	# this was here mv /tmp/$1NOTGMLINES.txt /var/www/wrlc/report/$1-REPORT.txt
-	#rm $1GMLINES.txt
+	mv /tmp/$1NOTGMLINES.txt /var/www/wrlc/report/$1-REPORT.txt
 else
 	# ---------------------------------------
 	# There are no GM holdings, so do nothing
