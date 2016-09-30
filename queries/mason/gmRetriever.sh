@@ -65,7 +65,7 @@ function writeOriginal()
 # ------------------------------------------------
 destfile=/tmp/$vBib'-'$vMfhd'VZ.out'
 echo 'vBib is '$vBib >> $LOG
-grep 'GM|' /var/www/wrlc/report/$vBib-REPORT.txt > $destfile
+grep $vMfhd /var/www/wrlc/report/$vBib-REPORT.txt >> $destfile
 }
 #
 #
