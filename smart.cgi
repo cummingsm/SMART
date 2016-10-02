@@ -115,6 +115,7 @@ if ( length($ErrorMessage) > 10 ) {
 		#
 		`bash queries/dispatchWRLC.sh $BIBID $formdata{id_type} $formdata{searchvalue} `;
 		`bash utils/filtertitles.sh $BIBID`;
+		`bash utils/dedupStatus.sh $BIBID`;
 		#
 		# ----------------------------------------
 		# GET GEO MASONS SCF ITEM DATA (if any)
