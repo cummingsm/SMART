@@ -139,11 +139,6 @@ fi
 	fi
 	echo "<TD>" $ichron " &nbsp; </TD>";
 	echo "<TD>"$ibarcode" &nbsp; </TD>";
-	#if [[ "$istatus" == "Lost--System Applied" ]]; then
-		#echo "<TD COLSPAN='5' BGCOLOR='RED'><FONT COLOR='#FFFFFF'>" $istatus  " &nbsp; </FONT></TD>"
-	#else
-		#echo "<TD COLSPAN='5'>" $istatus  " &nbsp; </TD>"
-	#fi
 	echo $mystatus;
 	echo "</TR>";
 	#
