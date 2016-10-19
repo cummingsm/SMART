@@ -15,7 +15,7 @@ http://gwreports.wrlc.org/wrlc/help.html
 # Configuration
 Files in the repository under the directory 'htmlpages' should be placed in the apache document root/wrlc directory. 
 The files with the .cgi suffix go in the cgi-bin directory, and the rest go in their respective directories under cgi-bin 
--- for example cgi-bin/queries/
+-- for example cgi-bin/queries/ cgi-bin/queries/mason  cgi-bin/utils   cgi-bin/responses  /assets  
 
-The SQL queries must be edited. Replace "\<PASSWORD\>" and "\<HOST\>" with the appropriate values.
+
 
