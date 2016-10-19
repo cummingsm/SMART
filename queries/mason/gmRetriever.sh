@@ -81,7 +81,7 @@ echo "Processing WRLC BIB $2 MFHD $3" >> $LOG
 # then strip trailing spaces
 # -------------------------------------------
 echo 'calling getGMBib.sh ' >> $LOG
-bash queries/mason/getGMBib.sh $2;
+bash /var/www/cgi-bin/queries/mason/getGMBib.sh $2;
 newbib=`grep '|' /tmp/$2gmbib.out | cut -f2 -d'|'`;
 gmbib=`echo $newbib | sed "s/ //g"`
 rm /tmp/$2gmbib.out

@@ -9,12 +9,17 @@
 # $1 is the bibid
 #
 LOG=/var/www/wrlc/log/BIBID-$1.log;
-REPT=/var/www/wrlc/report/$1-REPORT.txt;
+#REPT=/var/www/wrlc/report/$1-REPORT.txt;
+# This 'FUZZY' match on field name is being introduced by bulkprocessing. 
+# which seems to have a hidden character in the file name.
+# This may be a temporary workaround.
+FUZZY=`echo $1 | cut -c1-5`;
+REPT=/var/www/wrlc/report/$FUZZY*
 #
 echo 'filtering titles' >> $LOG;
 #
 # call query to get a few leading characters from the title for this bib
-bash queries/getStubTitle.sh $1;
+bash /var/www/cgi-bin/queries/getStubTitle.sh $1;
 # outut from the query looks like this
 # 1345785 | Student-to-s |
 #

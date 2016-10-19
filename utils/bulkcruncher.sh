@@ -1,8 +1,8 @@
 #!/bin/bash
 #
-# FILENAME: cruncher.sh
+# FILENAME: bulkcruncher.sh
 # FILEPATH: {docroot}/cgi-bin/utils/
-# PARAMS  : $1 is the bibid, $2 is the search value
+# PARAMS  : $1 is the bibid, $2 is the barcode
 # OUTPUT  : Revised /var/www/wrlc/report/$1-REPORT.txt
 # PURPOSE : Apply an algorithm to determine the volume sort group, 
 #	    count the number 'volumes' at SCF or LIB, edit original report file 
@@ -21,7 +21,7 @@ echo "LIB|BIBID|MFHDID|ITEMID|BARCODE|ITEM_PERM|ITEM_PERM_ID|ITEM_TEMP_ID|MFHD_L
 # 
 #
 # remove previous working file
-rm /tmp/$1-normalized.out
+rm /tmp/$1-normalized.out 
 #
 # ---------------------------------------------
 # get each enumeration field, convert the value
@@ -126,7 +126,6 @@ do
 	if [[ "${#n}" == "7" ]]; then normvol='0'$n; fi
 	if [[ "${#n}" == "8" ]]; then normvol=$n; fi
 	# replace content of field 29, NORMAL_VOL
-	echo $normvol;
 	sed -i -e s/NORMAL_VOL/$normvol/g /tmp/$1a.out;
 	#
 	# -------------------------------
@@ -157,8 +156,8 @@ sort -t'|' -V -k29,29 /tmp/$1-normalized.out >> /tmp/$1sortreport.out;
 grep -v PUBPLACE /tmp/$1sortreport.out > /tmp/$1sortdata.out;
 titlescf=`grep -c  IS_SCF /tmp/$1sortdata.out`;
 titlelib=`grep -cv IS_SCF /tmp/$1sortdata.out`;
-rm /tmp/$1counted.out;
-rm /tmp/$1countedreport.out;
+rm /tmp/$1counted.out 
+rm /tmp/$1countedreport.out 
 for (( n=1; n<=$linecount; n++ ))
 do
 	awk NR==$n /tmp/$1sortdata.out > /tmp/$1b.out;
@@ -166,15 +165,18 @@ do
 	vol=`cat /tmp/$1b.out | cut -f29 -d'|'`;
 	# save all occurances of the same volume 
 	#
-	grep $vol /tmp/$1sortdata.out > /tmp/$1vols.out
-	volscf=`grep -c IS_SCF /tmp/$1vols.out`;
-	vollib=`grep -cv IS_SCF /tmp/$1vols.out`;
+	# New test for null volume added in 10-18 version
+	if [[ "$vol" != "" ]]; then
+		grep $vol /tmp/$1sortdata.out > /tmp/$1vols.out
+		volscf=`grep -c IS_SCF /tmp/$1vols.out`;
+		vollib=`grep -cv IS_SCF /tmp/$1vols.out`;
 	#
-	sed -i -e s/#TITLEWRLC/$titlescf/g /tmp/$1b.out
-	sed -i -e s/#TITLEHOME/$titlelib/g /tmp/$1b.out
-	sed -i -e s/#VOLWRLC/$volscf/g /tmp/$1b.out
-	sed -i -e s/#VOLHOME/$vollib/g /tmp/$1b.out
-	sed -i -e s/#REQVAL/$2/g /tmp/$1b.out
+		sed -i -e s/#TITLEWRLC/$titlescf/g /tmp/$1b.out
+		sed -i -e s/#TITLEHOME/$titlelib/g /tmp/$1b.out
+		sed -i -e s/#VOLWRLC/$volscf/g /tmp/$1b.out
+		sed -i -e s/#VOLHOME/$vollib/g /tmp/$1b.out
+		sed -i -e s/REQVAL/$2/g /tmp/$1b.out
+	fi
 	cat /tmp/$1b.out >> /tmp/$1counted.out
 done
 # start a file with field headers

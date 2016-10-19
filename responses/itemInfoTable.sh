@@ -83,6 +83,17 @@ fi
 	SCFfound=`grep 'IS_SCF' /tmp/$1-itemdetail`;
 	#
 	# conditional print settings
+	if [[ "$istatus" == "Lost--System Applied" ]] || [[ "$istatus" == "Lost--Library Applied" ]]; then
+		mystatus="<TD COLSPAN='5' BGCOLOR='RED'><FONT COLOR='#FFFFFF'>"$istatus" &nbsp; </FONT></TD>"; 
+	elif [[ "$istatus" == "Damaged" ]]; then
+		mystatus="<TD COLSPAN='5' BGCOLOR='RED'><FONT COLOR='#FFFFFF'>"$istatus" &nbsp; </FONT></TD>"; 
+	elif [[ "$istatus" == "Missing" ]]; then
+		mystatus="<TD COLSPAN='5' BGCOLOR='RED'><FONT COLOR='#FFFFFF'>"$istatus" &nbsp; </FONT></TD>"; 
+	elif [[ "$istatus" == "Withdrawn" ]]; then
+		mystatus="<TD COLSPAN='5' BGCOLOR='RED'><FONT COLOR='#FFFFFF'>"$istatus" &nbsp; </FONT></TD>"; 
+	else
+		mystatus="<TD COLSPAN='5'>"$istatus" &nbsp; </TD>"; 
+	fi
 	trimLibrary=`echo $ilibrary | sed "s/(standard input)://"`; 
 	if [[ "$SCFfound" != "" ]]; 	then thisLOC="SCF"; 
 					else thisLOC="LIB"; fi
@@ -128,7 +139,12 @@ fi
 	fi
 	echo "<TD>" $ichron " &nbsp; </TD>";
 	echo "<TD>"$ibarcode" &nbsp; </TD>";
-	echo "<TD COLSPAN='5'>" $istatus  " &nbsp; </TD>"
+	#if [[ "$istatus" == "Lost--System Applied" ]]; then
+		#echo "<TD COLSPAN='5' BGCOLOR='RED'><FONT COLOR='#FFFFFF'>" $istatus  " &nbsp; </FONT></TD>"
+	#else
+		#echo "<TD COLSPAN='5'>" $istatus  " &nbsp; </TD>"
+	#fi
+	echo $mystatus;
 	echo "</TR>";
 	#
 	#

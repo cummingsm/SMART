@@ -127,7 +127,7 @@ if ( length($ErrorMessage) > 10 ) {
 		# APPLY VOLUME ALGORITHM AND GET COUNTS
 		# ---------------------------------------
 		#
-		`bash utils/cruncher.sh $BIBID`;
+		`bash utils/cruncher.sh $BIBID $formdata{searchvalue}`;
 		#
 		# -------------------------------------
 		# GENERATE THE WEB REPORT

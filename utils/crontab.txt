@@ -1,0 +1,9 @@
+#
+# FILENAME: crontab.txt
+# FILEPATH: na
+# PARAMS  : na
+# OUTPUT  : na
+# PURPOSE : documents the crontab entry for bulkprocessing
+# This entry in root crontab runs every five minutes looking for new uploads
+*/5 * * * * bash /var/www/cgi-bin/utils/finduploads.sh
+

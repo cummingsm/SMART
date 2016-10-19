@@ -16,6 +16,7 @@ echo "
 # navigation
         echo "<tr><td>Check an item results";
         echo "| <A HREF='../wrlc/smart.html'>New search</a>";
+	echo "| <a href='../wrlc/bulkprocess.html'>Bulk Process</a>";
         echo "| <a href='../wrlc/about.html'>About</a>  | <a href='../wrlc/help.html'>Help</a>";
 	echo "| <a href='https://goo.gl/forms/yFqrPaeZ1TPP5sWH2'>Feedback</a></td>";
 	echo "<TD > &nbsp; </TD></TR>";
