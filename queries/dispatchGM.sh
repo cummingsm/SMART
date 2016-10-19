@@ -18,9 +18,9 @@ output=$4
 LOG=/var/www/wrlc/log/BIBID-$1.log
 echo "TIMER|"`date +%T`"|dispatchGM.sh" >> $LOG
 echo "Parameters: $thisbibid $idtype $request $output" >> $LOG
-gmCount=`grep -c 'GM|' /var/www/wrlc/$1-REPORT.txt`;
+gmCount=`grep -c 'GM|' /var/www/wrlc/report/$1-REPORT.txt`;
 if [[ "$gmCount" != "0" ]]; then
 		echo "------------------------------" >> $LOG
-		bash queries/mason/gmChecker.sh $thisbibid
+		bash /var/www/cgi-bin/queries/mason/gmChecker.sh $thisbibid
 fi
 #
