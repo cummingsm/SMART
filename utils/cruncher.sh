@@ -2,7 +2,7 @@
 #
 # FILENAME: cruncher.sh
 # FILEPATH: {docroot}/cgi-bin/utils/
-# PARAMS  : $1 is the bibid
+# PARAMS  : $1 is the bibid, $2 is the search value
 # OUTPUT  : Revised /var/www/wrlc/report/$1-REPORT.txt
 # PURPOSE : Apply an algorithm to determine the volume sort group, 
 #	    count the number 'volumes' at SCF or LIB, edit original report file 
@@ -17,7 +17,7 @@
 # Use this string as the field headers. The sequence must be the same as the order of fields in queries/10searchitems.sh
 # All the fields after SERIES were output as placeholder text in the sql. They values are slightly different.
 # Here they are label them better for clarity if/when a user downloads the data file.
-echo "LIB|BIBID|MFHDID|ITEMID|BARCODE|ITEM_PERM|ITEM_PERM_ID|ITEM_TEMP_ID|MFHD_LOC_ID|ITEM_STATUS_DESC|BSUP|ISBN|ISSN|LCCN|OCLC|MSUP|NORM_CALL|DISP_CALL|ENUM|CHRON|#MESSAGE#|TITLE|AUTHOR|EDITION|PUBLISHER|PUBPLACE|PUBDATE|SERIES|NORMAL_VOL|#TITLEWRLC|#TITLEHOME|#VOLWRLC|#VOLHOME" > /tmp/$1sortreport.out;
+echo "LIB|BIBID|MFHDID|ITEMID|BARCODE|ITEM_PERM|ITEM_PERM_ID|ITEM_TEMP_ID|MFHD_LOC_ID|ITEM_STATUS_DESC|BSUP|ISBN|ISSN|LCCN|OCLC|MSUP|NORM_CALL|DISP_CALL|ENUM|CHRON|#MESSAGE#|TITLE|AUTHOR|EDITION|PUBLISHER|PUBPLACE|PUBDATE|SERIES|NORMAL_VOL|#TITLEWRLC|#TITLEHOME|#VOLWRLC|#VOLHOME|#REQUEST" > /tmp/$1sortreport.out;
 # 
 #
 # remove previous working file
@@ -174,6 +174,7 @@ do
 	sed -i -e s/#TITLEHOME/$titlelib/g /tmp/$1b.out
 	sed -i -e s/#VOLWRLC/$volscf/g /tmp/$1b.out
 	sed -i -e s/#VOLHOME/$vollib/g /tmp/$1b.out
+	sed -i -e s/#REQVAL/$2/g /tmp/$1b.out
 	cat /tmp/$1b.out >> /tmp/$1counted.out
 done
 # start a file with field headers
