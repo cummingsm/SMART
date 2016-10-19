@@ -54,7 +54,7 @@ if [[ "$GMcount" != "0" ]]; then
 		# $thisvBib will be the same unless we are processing
 		#  more than one line in GMLINES
 		#
-		bash queries/mason/gmRetriever.sh  $1 $thisvBib $thisvMfhd 
+		bash /var/www/cgi-bin/queries/mason/gmRetriever.sh  $1 $thisvBib $thisvMfhd 
 		#
 		# ---------------------------------------
 		# Append scraped results to file containg header

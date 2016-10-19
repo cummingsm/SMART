@@ -5,8 +5,7 @@ use CGI;
 use CGI::Carp qw ( fatalsToBrowser );
 use File::Basename;
 
-#$CGI::POST_MAX = 1024 * 5000;
-$CGI::POST_MAX = 1024 * 2;
+$CGI::POST_MAX = 1024 * 3;
 my $safe_filename_characters = "a-zA-Z0-9_.-";
 my $upload_dir = "/var/www/wrlc/upload";
 
@@ -61,12 +60,11 @@ print <<END_HTML;
 <title>GWU Voyager inventory service</title>
 </head>
 <body>
-<form action="http://gwreports.wrlc.org/cgi-bin/bulksteptwo.cgi" method="post">
+<form action="http://gwreports.wrlc.org/cgi-bin/validatebarcodes.cgi" method="post">
 <table bgcolor="#FFFFFF" cellpadding="4" cellspacing="1" border="0">
 <tr><td>
-<a href='../wrlc/starthere.html'>Check an item</a> | Bulk Process | <a href='../wrlc/about.html'>About</a>  | <a href='../wrlc/help.html'>Help</a> </td></tr>
+<a href='../wrlc/smart.html'>Check an item</a> | Bulk Process | <a href='../wrlc/about.html'>About</a>  | <a href='../wrlc/help.html'>Help</a> </td></tr>
 <tr><td>
-<p>Upload a list of barcodes for processing. 
 <p><strong>Step 2</strong></p>
 <input type='hidden' name='bulkfile' value='$info'>
 </td></tr>
@@ -74,9 +72,13 @@ print <<END_HTML;
     <table border='0'>
     <tr>
          <td> <img src='assets/ok.jpg' height='50'/></td>
-         <td> The file <strong> $info </strong> has been successfully uploaded!<br>
-              Click the SUBMIT button below to continue processing... </td>
+         <td> Your file <strong> $info </strong> has been successfully uploaded!<br>
+              Enter your email address, then click the SUBMIT button below to continue processing... </td>
     </tr>
+<tr>
+	<td> &nbsp; </td>
+	<td><input type='text' name='notifyemail' required></td>
+</tr>
     </table>
 </td></tr>
 <tr bgcolor="CORNSILK"><td >
