@@ -92,7 +92,10 @@ if ( length($validstatus) < 10 ) {
 	`rm $jobfile`;
 	print `bash responses/pageheader.sh`;
 	print "<TR><TD><FONT COLOR='RED'>".$validstatus."</FONT><BR><BR>";
-	print "The file has been removed. Please check your data and re-upload the file.<TD></TR></TABLE></BODY></HTML>";
+	print "The file has been removed. Please check your data and re-upload the file.<BR>";
+	print "One type of error to look for is a blank line in the list of barcodes, <BR>";
+	print "especially at the end of the file. Another problem would be barcodes that are not the correct length.<BR>";
+	print "Sorry for the inconvenience.<TD></TR></TABLE></BODY></HTML>";
 	print "<TABLE CELLPADDING='2' CELLSPACING='1' WIDTH='90%'><TR BGCOLOR='#EAEAEA'><TD ALIGN='CENTER'> ";
 	print "----[ Shared Materials Audit Reporting Tool ]---- </TD><TR></TABLE>";
 	print "</BODY></HTML>";
