@@ -14,7 +14,7 @@ LOG=/var/www/wrlc/log/BIBID-$1.log
 echo "TIMER|"`date +%T`"|9searchissns" >> $LOG
 echo "------------------------------------" >> $LOG
 echo '9searchissn:Bibid(s) that match ISSN' >> $LOG
-rm /tmp/$1BS-LIST.out
+rm /tmp/$1BS-LIST.out 2>/dev/null
 max=`wc -l /tmp/$1BS.out | cut -f1 -d' '`;
 for (( i=1; i<=$max; i++ ))
 do
@@ -31,7 +31,7 @@ SQLPATH=/usr/lib/oracle/10.2.0.4/client64/bin/
 export SQLPATH
 echo 'SQLPATH:' $SQLPATH
 #
-$SQLPATH/sqlplus -S dbread/<PASSWORD>@'(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=<HOST>)(PORT=1521)))(CONNECT_DATA=(SID=VGER)))'<<EOF
+$SQLPATH/sqlplus -S dbread/libs8db@'(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=oracle.wrlc.org)(PORT=1521)))(CONNECT_DATA=(SID=VGER)))'<<EOF
 set HEADING off
 set ECHO off
 set PAGESIZE 1000
@@ -58,5 +58,5 @@ echo 'iteration '$i $normissn >> $LOG
 done
 # 
 # formatting
-bash utils/reformatsql.sh $1 'BS'
+bash /var/www/cgi-bin/utils/reformatsql.sh $1 'BS'
 #

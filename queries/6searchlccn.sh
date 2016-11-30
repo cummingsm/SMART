@@ -15,7 +15,7 @@ echo "TIMER|"`date +%T`"|6searchlccns" >> $LOG
 echo "-------------------------------------" >> $LOG
 echo "6searchlccn: Bibid(s) that match LCCN" >> $LOG
 # remove list from previous processing of this bibid
-rm /tmp/$1BL-LIST.out
+rm /tmp/$1BL-LIST.out 2>/dev/null
 max=`wc -l /tmp/$1BL.out | cut -f1 -d' '`;
 for (( i=1; i<=$max; i++ ))
 do
@@ -32,7 +32,7 @@ SQLPATH=/usr/lib/oracle/10.2.0.4/client64/bin/
 export SQLPATH
 echo 'SQLPATH:' $SQLPATH
 #
-$SQLPATH/sqlplus -S dbread/<PASSWORD>@'(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=<HOST>)(PORT=1521)))(CONNECT_DATA=(SID=VGER)))'<<EOF
+$SQLPATH/sqlplus -S dbread/libs8db@'(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=oracle.wrlc.org)(PORT=1521)))(CONNECT_DATA=(SID=VGER)))'<<EOF
 set HEADING off
 set ECHO off
 set PAGESIZE 1000
@@ -59,5 +59,5 @@ cat /tmp/$1BLX-$i.out >> $LOG
 done
 #
 # formatting
-bash utils/reformatsql.sh $1 'BL'
+bash /var/www/cgi-bin/utils/reformatsql.sh $1 'BL'
 #
