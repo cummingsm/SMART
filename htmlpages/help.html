@@ -313,7 +313,7 @@ You can download the data file that the system used to generate the web page.
 <li>Right-click the link next to 'Data' and <br>
     select 'Save As' to save the results as a file on your computer</li>
 <li>Files that are downloaded may be imported into other programs like Excel</li>
-<li>When you import a data file into Excel, make sure all the fields are imported as Text</li>
+<li><strong>When you import a data file into Excel, make sure <font color='red'>all the fields </font> are imported as Text</strong></li>
 </ul>
 <h3>Record Selection</h3>
 This system uses the BIBID or BARCODE requested as a starting point for the search. If a BARCODE was
@@ -683,14 +683,18 @@ processing the file in Step 2 which looks like this:
 <li>After entering your email address, click the Submit button. </li>
 <li>The next screen will provide an ID number for your request.</li>
 <li>The system will look for requests every five minutes; depending on the number of barcodes, the number of items retrieved 
-for each barcode, etc., your request could be ready anywhere between a minute to several minutes later. </li>
+for each barcode, etc., your request could be ready anywhere between a minute to several minutes later. <br>
+Estimate an average of 10 barcodes per minute. A file containing 1,000 barcodes could take (1000/10) 100 minutes,
+which is between an hour and half to two hours.</li> 
 <li>When the file has been processed you will receive an email with a link to the report.</li>
 </ul>
 </td></tr>
 <tr>
 <td>
-The confirmation page looks like this example where michaelc is the recipient and the request number is 1476902306:<p>
+The confirmation page looks like this example where michaelc@email.gwu.edu is the recipient and the request number is 1476902306:<p>
+<table bgcolor='cornsilk'><tr><td>
 <H3>Thank you</H3>When processing is complete, an email will be sent to <strong>michaelc@email.gwu.edu </strong> referencing request number <strong> 1476902306 .</strong>
+</td></tr></table>
 </td>
 </tr>
 <tr>
@@ -698,12 +702,17 @@ The confirmation page looks like this example where michaelc is the recipient an
 <h2>Email notice</h2>
 This is a screen shot of the email the system sends when processing is complete. 
 <br>
-<img src='../cgi-bin/assets/emailcapture.gif'>
+<img src='../cgi-bin/assets/emailcapture.gif' border='1'>
 </td>
 </tr>
 <tr>
 <td>
-The last column on the right of the the data includes the barcode that was used to retrieved the item. If the data is imported into Excel, you could filter on the #REQUEST column to see the line or lines retrieved for that barcode.
+<h2>Bulk Processing report</h2>
+The bulk processing report is one text file with all of the results.
+<p>
+The last column on the right of the the data in the bulk processing report is the barcode that was used to retrieved the item. 
+</p>
+<p>If the data is imported into Excel, you could filter on the #REQUEST column to see the line or lines retrieved for that barcode.
 </td>
 </tr>
 </table>
