@@ -648,7 +648,7 @@ The program accepts a text file containing a set of barcodes to be processed. Th
 <p><strong>Step 1</strong></p>
 <ul>
 <li>The file should have one barcode per line.</li>
-<li>Do not include more than 100 lines. </li>
+<li>Do not include more than 1,000 lines. </li>
 <li>No spaces or letters should be in the file.</li>
 <li>After you submit your file it will be validated. </li>
 </ul>
@@ -711,6 +711,12 @@ The last column on the right of the the data includes the barcode that was used 
 </td>
 </tr>
 </table>
+<h2>Bulk Processing errors</h2>
+<p>
+The program will check for the length of barcodes. If any are less than 14 characters, an error message will display, and the job will be aborted.
+</p>
+<p>
+Use Notepad to open your barcode file; locate the problem barcodes. Either delete the line with the bad barcode, or correct it. Save the file, and return to SMART to upload the file again. 
 </body>
 </html> 
 
