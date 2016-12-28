@@ -5,7 +5,7 @@ use CGI;
 use CGI::Carp qw ( fatalsToBrowser );
 use File::Basename;
 
-$CGI::POST_MAX = 1024 * 14;
+$CGI::POST_MAX = 1024 * 16;
 my $safe_filename_characters = "a-zA-Z0-9_.-";
 my $upload_dir = "/var/www/wrlc/upload";
 
