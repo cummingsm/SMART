@@ -12,6 +12,8 @@
 # 
 LOG=/var/www/wrlc/log/BIBID-$1.log;
 echo 'report file before testing for GM' >> $LOG
+echo 'received title' >> $LOG
+echo $2 >> $LOG
 GMcount=`grep -c 'GM|' /var/www/wrlc/report/$1-REPORT.txt`;
 if [[ "$GMcount" != "0" ]]; then
 	# ------------------------------------------------------------------
@@ -49,12 +51,12 @@ if [[ "$GMcount" != "0" ]]; then
 		# Scrape GM Catalog 
 		# -------------------------------------------------
 		#
-		echo 'calling gmRetriever.sh'$1 $thisvBib $thisvMfhd >> $LOG;
+		echo 'calling gmRetriever.sh'$1 $thisvBib $thisvMfhd $2 >> $LOG;
 		# $1 is the WRLC bib passed to the gmChecker script
 		# $thisvBib will be the same unless we are processing
 		#  more than one line in GMLINES
 		#
-		bash /var/www/cgi-bin/queries/mason/gmRetriever.sh  $1 $thisvBib $thisvMfhd 
+		bash /var/www/cgi-bin/queries/mason/gmRetriever.sh  $1 $thisvBib $thisvMfhd $2
 		#
 		# ---------------------------------------
 		# Append scraped results to file containg header
