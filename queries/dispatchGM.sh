@@ -21,6 +21,9 @@ echo "Parameters: $thisbibid $idtype $request $output" >> $LOG
 gmCount=`grep -c 'GM|' /var/www/wrlc/report/$1-REPORT.txt`;
 if [[ "$gmCount" != "0" ]]; then
 		echo "------------------------------" >> $LOG
-		bash /var/www/cgi-bin/queries/mason/gmChecker.sh $thisbibid
+		# add the title to the parameters
+		thistitle=`cat /var/www/wrlc/report/$1-REPORT.txt | grep -v BARCODE | cut -d'|' -f22 | head -1`
+		echo "Title sent is $thistitle" >> $LOG
+		bash /var/www/cgi-bin/queries/mason/gmChecker.sh $thisbibid "'$thistitle'"
 fi
 #
