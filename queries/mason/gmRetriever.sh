@@ -11,6 +11,7 @@
 # $1 = WRLC Bibid used for reporting.	
 # $2 = WRLC Bibid for the GM record in WRLC Voyager 
 # $3 = WRLC Mfhd 
+# $4 = title
 # 
 LOG=/var/www/wrlc/log/BIBID-$1.log
 echo 'starting gmRetriever.sh' >> $LOG
@@ -20,6 +21,7 @@ echo 'starting gmRetriever.sh' >> $LOG
 vBib=$1;
 gBib=$2;
 vMfhd=$3;
+vTitle=`echo $@ | cut -f2 -d"'"`;
 # vBib is the Voyager BIBID that is being used for the report.
 # gBib is the same as vBIB for the FIRST time this script is called.
 # 
@@ -43,7 +45,7 @@ function writeVolume()
 echo 'writeVolume() saving a GM volume ' >> $LOG
 echo 'vBib and vMfhd are' $vBib  $vMfhd  >> $LOG
 volumefile=/tmp/$vBib'-'$vMfhd'VZ.out'
-echo 'GM|'$gBib'|'$vMfhd'||||||GMBIB '$gmbib'_IS_SCF||||||||||'$1'||#MESSAGE#||||||||NORMAL_VOL|#TITLEWRLC|#TITLEHOME|#VOLWRLC|#VOLHOME' >> $volumefile
+echo 'GM|'$gBib'|'$vMfhd'||||||GMBIB '$gmbib'_IS_SCF||||||||||'$1'||#MESSAGE#|'$vTitle'|||||||NORMAL_VOL|#TITLEWRLC|#TITLEHOME|#VOLWRLC|#VOLHOME' >> $volumefile
 }
 #
 function writeNotes()
@@ -53,7 +55,7 @@ function writeNotes()
 # -------------------------------------------------
 echo 'vBib and vMfhd are' $vBib  $vMfhd >> $LOG
 notesfile=/tmp/$vBib'-'$vMfhd'VZ.out'
-echo 'GM|'$gBib'|'$vMfhd'||||ITEM_PERM_LOC#|ITEM_TEMP_LOC#|GMBIB '$gmbib'_IS_SCF||||||||||||SEE NOTE IN GM CATALOG Pwebrecon.cgi?BBID='$gmbib'||||||||NORMAL_VOL|#TITLEWRLC|#TITLEHOME|#VOLWRLC|#VOLHOME' >> $notesfile
+echo 'GM|'$gBib'|'$vMfhd'||||ITEM_PERM_LOC#|ITEM_TEMP_LOC#|GMBIB '$gmbib'_IS_SCF||||||||||||SEE NOTE IN GM CATALOG Pwebrecon.cgi?BBID='$gmbib'|'$vTitle'|||||||NORMAL_VOL|#TITLEWRLC|#TITLEHOME|#VOLWRLC|#VOLHOME' >> $notesfile
 }
 #
 #
@@ -73,7 +75,8 @@ grep $vMfhd /var/www/wrlc/report/$vBib-REPORT.txt >> $destfile
 # PROCESSING STARTS HERE
 # ============================================
 SCF_FLAG="";
-echo "Processing WRLC BIB $2 MFHD $3" >> $LOG
+echo "Processing WRLC BIB $2 MFHD $3 " >> $LOG
+echo $vTitle >> $LOG
 #
 #
 # -------------------------------------------
