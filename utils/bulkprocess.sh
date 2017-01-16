@@ -42,17 +42,34 @@ for (( i=1; i<=$max; i++ ))
 		BARCODE=`awk NR==$i $JOBFILE | cut -c1-14`;
 		# Replace leading or trailing blank spaces
 		BIBID=`bash /var/www/cgi-bin/queries/1getbibforbarcode.sh $BARCODE | awk NR==4 | cut -f1 -d'|' | sed 's/ //g'`;
-		echo $BARCODE'|'$BIBID >> $JOBLOG;
-		#
-		bash /var/www/cgi-bin/queries/bulkdispatchWRLC.sh $BIBID BAR $BARCODE
-		bash /var/www/cgi-bin/utils/filtertitles.sh $BIBID
-		bash /var/www/cgi-bin/utils/dedupStatus.sh $BIBID
-		bash /var/www/cgi-bin/queries/dispatchGM.sh $BIBID BAR $BARCODE
-		bash /var/www/cgi-bin/utils/bulkcruncher.sh $BIBID $BARCODE
-		rm /tmp/$BIBID*
-		# add this report data to the combined report 
-		grep -v PUBPLACE /var/www/wrlc/report/$BIBID-REPORT.txt >> /var/www/wrlc/report/JOB-$JOBID.txt
+		# Check for this BIBID having been identified by a previous pass.
+		bibcount=`grep -c $BIBID $JOBLOG`;
+		if [[ $bibcount != "0" ]] ; then
+			echo $BARCODE'|'$BIBID'-already found' >> $JOBLOG;
+		else
+			# OK to get results for this BIBID
+			echo $BARCODE'|'$BIBID >> $JOBLOG;
+			bash /var/www/cgi-bin/queries/bulkdispatchWRLC.sh $BIBID BAR $BARCODE
+			bash /var/www/cgi-bin/utils/filtertitles.sh $BIBID
+			bash /var/www/cgi-bin/utils/dedupStatus.sh $BIBID
+			bash /var/www/cgi-bin/queries/dispatchGM.sh $BIBID BAR $BARCODE
+			bash /var/www/cgi-bin/utils/bulkcruncher.sh $BIBID $BARCODE
+			rm /tmp/$BIBID*
+			# add this report data to the combined report 
+			grep -v PUBPLACE /var/www/wrlc/report/$BIBID-REPORT.txt >> /var/www/wrlc/report/JOB-$JOBID.txt
+		fi
 	done
+#
+# ---------------------------------
+# ENSURE LINES ARE NOT DUPLICATED
+# ---------------------------------
+cat /var/www/wrlc/report/JOB-$JOBID.txt | uniq --check-chars=20 > /var/www/wrlc/report/$JOBID.tmp
+#
+# ----------------------------------
+# remove lines with no invalid count
+# ----------------------------------
+cat /var/www/wrlc/report/$JOBID.tmp | grep -v '#REQVAL' > /var/www/wrlc/report/JOB-$JOBID.txt
+rm /var/www/wrlc/report/$JOBID.tmp
 #
 # ---------------------------------
 # INSERT COLUMNS HEADER before data
