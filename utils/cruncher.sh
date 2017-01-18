@@ -42,7 +42,13 @@ do
 		fi
 		# replace characters IN THIS ORDER 
 		stepb=`echo $thisrow | sed  's/\\./:/g'` ;
-		stepc=`echo $stepb | sed 's/[A-Za-z]//g'`;
+		# new steps
+		stepb2=`echo $stepb | sed  's/\\,/:/g'` ;
+		stepb3=`echo $stepb2 | sed 's/\\#/:/g'` ;
+		stepb4=`echo $stepb3 | sed 's/\\;/:/g'` ;
+		stepb5=`echo $stepb4 | sed 's/\\=/:/g'` ;
+		#
+		stepc=`echo $stepb5 | sed 's/[A-Za-z]//g'`;
 		stepd=`echo $stepc | sed 's/-/:/g'`;
 		stepe=`echo $stepd | sed 's/(/:/g'`;
 		stepf=`echo $stepe | sed 's/)/:/g'`;
@@ -112,7 +118,7 @@ do
 			fi
                 fi
 	fi
-	normvol=$n;
+	normvol=`echo $n | sed 's/[=,-;]//g'`;
 	# -----------------------------------------------------
 	# left pad the volume
 	# this left pads the value, (printf %08d $h didn't work)
@@ -124,7 +130,7 @@ do
 	if [[ "${#n}" == "5" ]]; then normvol='000'$n; fi
 	if [[ "${#n}" == "6" ]]; then normvol='00'$n; fi
 	if [[ "${#n}" == "7" ]]; then normvol='0'$n; fi
-	if [[ "${#n}" == "8" ]]; then normvol=$n; fi
+	if [[ "${#n}" > "8" ]];  then normvol='NUMERROR'; fi
 	# replace content of field 29, NORMAL_VOL
 	echo $normvol;
 	sed -i -e s/NORMAL_VOL/$normvol/g /tmp/$1a.out;
