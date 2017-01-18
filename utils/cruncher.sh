@@ -43,10 +43,10 @@ do
 		# replace characters IN THIS ORDER 
 		stepb=`echo $thisrow | sed  's/\\./:/g'` ;
 		# new steps
-		stepb2=`echo $stepb | sed  's/\\,/:/g'` ;
-		stepb3=`echo $stepb2 | sed 's/\\#/:/g'` ;
-		stepb4=`echo $stepb3 | sed 's/\\;/:/g'` ;
-		stepb5=`echo $stepb4 | sed 's/\\=/:/g'` ;
+		stepb2=`echo $stepb | sed  's/,/:/g'` ;
+		stepb3=`echo $stepb2 | sed 's/#/:/g'` ;
+		stepb4=`echo $stepb3 | sed 's/;/:/g'` ;
+		stepb5=`echo $stepb4 | sed 's/=/:/g'` ;
 		#
 		stepc=`echo $stepb5 | sed 's/[A-Za-z]//g'`;
 		stepd=`echo $stepc | sed 's/-/:/g'`;
@@ -118,7 +118,7 @@ do
 			fi
                 fi
 	fi
-	normvol=`echo $n | sed 's/[=,-;]//g'`;
+	normvol=$n;
 	# -----------------------------------------------------
 	# left pad the volume
 	# this left pads the value, (printf %08d $h didn't work)
