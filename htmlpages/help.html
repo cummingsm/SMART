@@ -12,7 +12,7 @@
 </head>
 <body>
 <table bgcolor="#FFFFFF" cellpadding="4" cellspacing="1" border="0">
-<tr><td><a href='smart.html'>Check an item</a>  |  <a href='bulkprocess.html'>Bulk Process</a> | <a href='about.html'>About</a>| Help | <a href='https://goo.gl/forms/yFqrPaeZ1TPP5sWH2'>Feedback</a></td></tr>
+<tr><td><a href='smart.html'>Check an item</a>  |  <a href='about.html'>About</a>| Help | <a href='https://goo.gl/forms/yFqrPaeZ1TPP5sWH2'>Feedback</a></td></tr>
 <tr>
 <td>
 Shared Materials Audit Reporting Tool (SMART)
@@ -50,7 +50,7 @@ during processing. Do not close the window.</li>
 </ul>
 <p>
 <h3>Results</h3>
-The results of a search includes three things:
+The results page from a search includes three things:
 <ol>
 <li>A file containing the search result data, in pipe-delimited format</li>
 <li>A file containing a log of the search processing</li>
@@ -703,6 +703,8 @@ The confirmation page looks like this example where michaelc@email.gwu.edu is th
 This is a screen shot of the email the system sends when processing is complete. 
 <br>
 <img src='../cgi-bin/assets/emailcapture.gif' border='1'>
+<br>
+To save the data file, right-click the JOB name and select <strong>"Save link as"</strong>
 </td>
 </tr>
 <tr>
@@ -713,6 +715,9 @@ The bulk processing report is one text file with all of the results.
 The last column on the right of the the data in the bulk processing report is the barcode that was used to retrieved the item. 
 </p>
 <p>If the data is imported into Excel, you could filter on the #REQUEST column to see the line or lines retrieved for that barcode.
+</p>
+<p>
+If the program detects that it has already found the bibid that matches a barcode, it will not process it again. Instead the log will have a note saying 'already found.'
 </td>
 </tr>
 </table>
@@ -726,6 +731,22 @@ The program will check for the length of barcodes. If any are less than 14 chara
 </p>
 <p>
 Use Notepad to open your barcode file; locate the problem barcodes. Either delete the line with the bad barcode, or correct it. Save the file, and return to SMART to upload the file again. 
+<h2>IMPORTANT notes about Bulk Processing output and working with Excel</h2>
+<ul>
+<li>Import Settings<br>
+When importing the output from the bulk processing job into Excel, make sure you specifiy that all of the fields are of type 'Text'. The column "NORMAL_VOL must be set to type TEXT.
+</li>
+<li>Check the titles<br>
+After loading the data into Excel, you should sort the file by the TITLE column. Then take the time to scroll through the list of titles. You may notice that the program has already removed punctuation from the titles. That helps ensure the same title isn't sorted differently just because it does or does not end with a period character for example. If you see a title that is slightly different but obviously should be the same as the one nearby, make it match. An example would be one version of the title has the word 'The' while another does not. Remember, if a cell in one row should match the one above it, an easy fix is to click on the first cell, then drag the square from the right corner of the cell down to the next row. Excel will make the second row the same as the first.
+</li>
+<li>About call numbers<br>
+You may want to make a list in call number order. The column NORM_CALL is best for sorting call numbers. Unfortunately, some titles do not have call numbers. For example, periodicals / serials often do not. When those types of records are in your dataset it's not very helpful to try to sort by call number. 
+Also, you should be aware that Gallaudet uses Dewey call numbers rather than Library of Congress call numbers. 
+If your output doesn't have many blank call numbers, you may want to take the time to fill-in a value in NORM_CALL that you think it should be so that you could sort that way.
+</li>
+</ul>
+Consider using Microsoft Access to generate reports based on the data table.
+</p>
 </body>
 </html> 
 
