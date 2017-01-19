@@ -146,6 +146,17 @@ do
 			#fi
 		#fi
         #fi
+ 	# -------------------------------------------------------------------------
+        # Normalize the titles. Some libraries included special chars, some did not
+        # -------------------------------------------------------------------------
+        # Get three parts, fields before the title 1-21, the title, fields after the title 23-34
+        # Replace special chars in title, then output the full line replacing the original.
+        beginstr=`cat /tmp/$1a.out | cut -f1-21 -d'|'`;
+        titlestr=`cat /tmp/$1a.out | cut -f22 -d'|'| sed 's/[,;:\.\/]//g'`;
+        endstr=`cat /tmp/$1a.out | cut -f23-34 -d'|'`;
+        rm /tmp/$1a.out
+        echo $beginstr'|'$titlestr'|'$endstr > /tmp/$1a.out
+        #
 cat /tmp/$1a.out >> /tmp/$1-normalized.out;
 done
 #
