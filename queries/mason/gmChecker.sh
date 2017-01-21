@@ -65,8 +65,9 @@ if [[ "$GMcount" != "0" ]]; then
 		# --------------------------------------- 
 		#
 		cat /tmp/$1*VZ.out >> /tmp/$1NOTGMLINES.txt
-		rm /tmp/$1*VZ.out
+		#rm /tmp/$1*VZ.out
 	done
+	rm /tmp/*VZ.out
 	mv /tmp/$1NOTGMLINES.txt /var/www/wrlc/report/$1-REPORT.txt
 else
 	# ---------------------------------------
