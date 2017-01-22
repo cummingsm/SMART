@@ -40,12 +40,9 @@ if [[ "$GMcount" != "0" ]]; then
 	#
 	for (( i=1; i<=$lines; i++ ))
 	do
-		awk NR==$i /tmp/$1GMLINES.txt > /tmp/$i.out;
-		thisvBib=`cat /tmp/$i.out   | cut -f2  -d'|'`;
-		thisvMfhd=`cat /tmp/$i.out  | cut -f3  -d'|'`;
-		thisLine=`cat /tmp/$i.out`;
-		# echo 'this is the line right now';
-		# echo $thisLine;
+		awk NR==$i /tmp/$1GMLINES.txt > /tmp/$1$i.out;
+		thisvBib=`cat /tmp/$1$i.out   | cut -f2  -d'|'`;
+		thisvMfhd=`cat /tmp/$1$i.out  | cut -f3  -d'|'`;
 		#
 		# -------------------------------------------------
 		# Scrape GM Catalog 
@@ -65,7 +62,7 @@ if [[ "$GMcount" != "0" ]]; then
 		# --------------------------------------- 
 		#
 		cat /tmp/$1*VZ.out >> /tmp/$1NOTGMLINES.txt
-		#rm /tmp/$1*VZ.out
+		rm /tmp/$1$i.out
 	done
 	rm /tmp/*VZ.out
 	mv /tmp/$1NOTGMLINES.txt /var/www/wrlc/report/$1-REPORT.txt
