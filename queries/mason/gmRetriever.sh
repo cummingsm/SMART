@@ -21,7 +21,7 @@ echo 'starting gmRetriever.sh' >> $LOG
 vBib=$1;
 gBib=$2;
 vMfhd=$3;
-vTitle=`echo $@ | cut -f2 -d"'"`;
+vTitle=`echo $@ | cut -f4-20 -d" " | sed "s/'//g"`;
 # vBib is the Voyager BIBID that is being used for the report.
 # gBib is the same as vBIB for the FIRST time this script is called.
 # 
@@ -42,6 +42,7 @@ function writeVolume()
 # $1 is the volume detail sent to this function
 # -------------------------------------------------
 #
+echo 'writeVolume() here is the global title' $vTitle >> $LOG
 echo 'writeVolume() saving a GM volume ' >> $LOG
 echo 'vBib and vMfhd are' $vBib  $vMfhd  >> $LOG
 volumefile=/tmp/$vBib'-'$vMfhd'VZ.out'
@@ -65,8 +66,10 @@ function writeOriginal()
 # ------------------------------------------------
 # If no volumes or notes, save original line
 # ------------------------------------------------
+echo 'writeOriginal() here is the global title ' $vTitle >> $LOG
 destfile=/tmp/$vBib'-'$vMfhd'VZ.out'
 echo 'vBib is '$vBib >> $LOG
+echo 'vMfhd is '$bMfhd >> $LOG
 grep $vMfhd /var/www/wrlc/report/$vBib-REPORT.txt >> $destfile
 }
 #
@@ -76,7 +79,7 @@ grep $vMfhd /var/www/wrlc/report/$vBib-REPORT.txt >> $destfile
 # ============================================
 SCF_FLAG="";
 echo "Processing WRLC BIB $2 MFHD $3 " >> $LOG
-echo $vTitle >> $LOG
+echo "TITLE: "$vTitle >> $LOG
 #
 #
 # -------------------------------------------
