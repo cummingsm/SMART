@@ -55,7 +55,8 @@ do
 		steph=`echo $stepg | sed 's/\[/:/g'`;
 		stepi=`echo $steph | sed 's/\]/:/g'`;
 		stepj=`echo $stepi | sed 's/:/NULL/g'`;
-		finalresult=`echo $stepj | sed 's/NULL/ /g'`;
+		stepk=`echo $stepj | sed 's/\\\/:/g'`;
+		finalresult=`echo $stepk | sed 's/NULL/ /g'`;
 		n=`echo $finalresult | cut -f1 -d' '`;
 		#
 		if [[ "$n" == "" ]]; then n='TEXTENUM'; fi
